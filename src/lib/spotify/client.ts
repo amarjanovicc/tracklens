@@ -27,8 +27,12 @@ export const SPOTIFY_SCOPES = [
 export const spotifyConfigured = () =>
   Boolean(process.env.SPOTIFY_CLIENT_ID && process.env.SPOTIFY_CLIENT_SECRET);
 
-export const redirectUri = () =>
-  `${process.env.NEXT_PUBLIC_APP_URL ?? "http://127.0.0.1:3000"}/api/spotify/callback`;
+export const redirectUri = () => {
+  const base =
+    process.env.NEXT_PUBLIC_APP_URL ??
+    (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "http://127.0.0.1:3000");
+  return `${base}/api/spotify/callback`;
+};
 
 function basicAuth() {
   return "Basic " + Buffer.from(`${process.env.SPOTIFY_CLIENT_ID}:${process.env.SPOTIFY_CLIENT_SECRET}`).toString("base64");
