@@ -90,7 +90,7 @@ Locally: `stripe listen --forward-to 127.0.0.1:3000/api/stripe/webhook`.
 1. Create a Neon (or Supabase) Postgres database and set `DATABASE_URL` (pooled URL is fine, `prepare: false` is set).
 2. `npm run db:migrate` against it.
 3. Import the repo in Vercel, set every variable from `.env.example`, with `BETTER_AUTH_URL` and `NEXT_PUBLIC_APP_URL` set to the production URL.
-4. Crons in `vercel.json`: hourly live sync, daily playlist snapshots. Hourly crons need a Vercel Pro plan; on Hobby, change the sync to daily or call it from an external scheduler.
+4. Crons in `vercel.json`: daily live sync and daily playlist snapshots (Hobby allows one run per day). For hourly sync use Vercel Pro (`0 * * * *`) or an external scheduler.
 
 ## Layout
 
